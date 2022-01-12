@@ -1,0 +1,16 @@
+[ {
+  "id" : 2,
+  "nome" : "Helena",
+  "endereco" : "Rua Clemente Rocha, 21",
+  "idade" : 19,
+  "listaDisciplinas" : [ {
+    "descricao" : "Banco de Dados",
+    "nota" : 8.0
+  }, {
+    "descricao" : "DEVOPS",
+    "nota" : 7.0
+  }, {
+    "descricao" : "Testes",
+    "nota" : 8.0
+  } ]
+} ]
