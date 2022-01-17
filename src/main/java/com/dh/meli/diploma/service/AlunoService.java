@@ -13,23 +13,26 @@ import com.dh.meli.diploma.entity.Aluno;
 import com.dh.meli.diploma.exception.BusinessException;
 import com.dh.meli.diploma.repository.AlunoRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 public class AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;
 
-
+    @Transactional
     public AlunoDTO adicionaAluno(Aluno aluno) throws IOException {
 
         return AlunoDTO.converteToDTO(alunoRepository.save(aluno));
 
     }
-
+    @Transactional
     public List<AlunoDTO> getListaAlunos() {
-        return AlunoDTO.converte(alunoRepository.getAll());
+        return AlunoDTO.converte(alunoRepository.findAll());
     }
 
+    @Transactional
     public AlunoDTO getStudantById(Long id) {
         try {
             return AlunoDTO.converteToDTO(alunoRepository.getById(id));
@@ -39,7 +42,7 @@ public class AlunoService {
         }
 
     }
-
+    @Transactional
     public AlunoMediaDTO getAlunoComMedia(Long id) {
         try {
             return AlunoMediaDTO.converteToMedia(alunoRepository.getById(id));
@@ -48,22 +51,22 @@ public class AlunoService {
         }
     }
 
-
+    @Transactional
     public AlunoDTO alterarAluno(Long id, Aluno aluno) {
         try {
             aluno.setId(id);
-            return AlunoDTO.converteToDTO(alunoRepository.alterarAluno(id, aluno));
-        } catch (BusinessException | IOException e) {
-            throw new BusinessException(e.getMessage());
+            return AlunoDTO.converteToDTO(alunoRepository.save(aluno));
+        } catch (BusinessException e) {
+            throw new BusinessException("Aluno não encontrado");
         }
 
     }
-
-    public String removerAluno(Long id) {
+    @Transactional
+    public void removerAluno(Long id) {
         try {
-            return alunoRepository.excluirAluno(id);
-        } catch (BusinessException | IOException e) {
-            throw new BusinessException(e.getMessage());
+            alunoRepository.deleteById(id);
+        } catch (BusinessException e) {
+            throw new BusinessException("ID "+ id + "not found");
         }
     }
 }

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import com.dh.meli.diploma.dto.AlunoMediaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,8 +61,9 @@ public class AlunoController {
     }
 
     @DeleteMapping("/removerAluno/{id}")
-    public String removeAluno(@PathVariable Long id) {
-        return alunoService.removerAluno(id);
+    public ResponseEntity<Void> removeAluno(@PathVariable Long id) {
+        alunoService.removerAluno(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
