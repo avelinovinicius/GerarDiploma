@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.dh.meli.diploma.dto.AlunoMediaDTO;
+import com.dh.meli.diploma.entity.Disciplina;
+import com.dh.meli.diploma.repository.DisciplinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,6 +31,9 @@ public class AlunoController {
 
     @Autowired
     private AlunoService alunoService;
+
+    @Autowired
+    private DisciplinaRepository repository;
 
     @PostMapping("/cadastra")
     public AlunoDTO cadastrarAluno(@Valid @RequestBody AlunoDTO dto) throws IOException {
@@ -57,8 +62,12 @@ public class AlunoController {
     public AlunoDTO alteraAluno(@PathVariable Long id, @RequestBody Aluno aluno) {
         aluno.setId(id);
         return alunoService.alterarAluno(id, aluno);
-
     }
+    @GetMapping("/exibirDisciplinas")
+    public List<Disciplina> exibirDisciplina() {
+        return repository.findAll();
+    }
+
 
     @DeleteMapping("/removerAluno/{id}")
     public ResponseEntity<Void> removeAluno(@PathVariable Long id) {

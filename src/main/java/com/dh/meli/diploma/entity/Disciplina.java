@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,13 +23,9 @@ public class Disciplina {
 	private String descricao;
 	private Double nota;
 
-	@Override
-	public String toString() {
-		return "Disciplina{" + "descricao='" + descricao + '\'' + ", nota=" + nota + '}';
 
-	}
 
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name="aluno_id")
-	private List<Aluno> listaAluno;
+	private Aluno aluno;
 }

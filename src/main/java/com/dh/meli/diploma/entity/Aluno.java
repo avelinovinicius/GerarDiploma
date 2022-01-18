@@ -1,5 +1,6 @@
 package com.dh.meli.diploma.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -24,9 +25,9 @@ public class Aluno{
     private String endereco;
     private int idade;
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="disciplina_id")
-    private List<Disciplina> listaDisciplinas;
+    @OneToMany(cascade=CascadeType.PERSIST, mappedBy = "aluno")
+    @JoinColumn(name="disciplina_id", nullable = false)
+    private List<Disciplina> listaDisciplinas = new ArrayList<>();
 
   
 }
