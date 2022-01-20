@@ -33,13 +33,13 @@ public class AlunoDTO {
     private String nome;
     private String endereco;
     private int idade;
-    private List<Disciplina> listaDisciplinas;
+    private List<Disciplina> disciplinas;
 
     public static Aluno converte(AlunoDTO dto)
     {
     	Aluno aluno = Aluno.builder().nome(dto.getNome())
     			.endereco(dto.getEndereco())
-    			.idade(dto.getIdade()).listaDisciplinas(dto.getListaDisciplinas())
+    			.idade(dto.getIdade()).disciplinas(dto.getDisciplinas())
     			.build();
     	return aluno;
     }
@@ -49,12 +49,16 @@ public class AlunoDTO {
     	return AlunoDTO.builder().id(aluno.getId()).nome(aluno.getNome())
     			.endereco(aluno.getEndereco())
     			.idade(aluno.getIdade())
-    			.listaDisciplinas(aluno.getListaDisciplinas())
+    			.disciplinas(aluno.getDisciplinas())
     			.build();
     }
     
     public static List<AlunoDTO> converte(List<Aluno> aluno){
 		return aluno.stream().map(a -> converteToDTO(a)).collect(Collectors.toList());
+	}
+
+	public AlunoDTO(long l, String string, String string2, int i) {
+		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -34,9 +34,9 @@ public class AlunoMediaDTO {
 
     public static AlunoMediaDTO converteToMedia(Aluno aluno) {
         AlunoMediaDTO alunoMediaDTO = AlunoMediaDTO.builder().nome(aluno.getNome())
-                .media(calculaMedia(aluno.getListaDisciplinas()))
-                .message(mensagemMedia(calculaMedia(aluno.getListaDisciplinas())))
-                .listaDisciplinas(aluno.getListaDisciplinas())
+                .media(calculaMedia(aluno.getDisciplinas()))
+                .message(mensagemMedia(calculaMedia(aluno.getDisciplinas())))
+                .listaDisciplinas(aluno.getDisciplinas())
                 .build();
         return alunoMediaDTO;
     }

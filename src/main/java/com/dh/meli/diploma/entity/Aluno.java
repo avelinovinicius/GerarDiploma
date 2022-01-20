@@ -3,6 +3,7 @@ package com.dh.meli.diploma.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,10 @@ import javax.persistence.*;
 @Table(name = "tb_aluno")
 public class Aluno{
 
+	public Aluno(long l, String string, String string2, int i) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,9 +30,11 @@ public class Aluno{
     private String endereco;
     private int idade;
 
-    @OneToMany(cascade=CascadeType.PERSIST, mappedBy = "aluno")
-    @JoinColumn(name="disciplina_id", nullable = false)
-    private List<Disciplina> listaDisciplinas = new ArrayList<>();
-
+    @JsonIgnoreProperties("alunos")
+    @ManyToMany
+    @JoinTable(name = "aluno_disciplina",
+            joinColumns = @JoinColumn(name = "id_aluno"),
+            inverseJoinColumns = @JoinColumn(name = "id_disciplina"))
+    private List<Disciplina>disciplinas;
   
 }

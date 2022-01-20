@@ -1,5 +1,6 @@
 package com.dh.meli.diploma.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,9 +24,7 @@ public class Disciplina {
 	private String descricao;
 	private Double nota;
 
-
-
-	@ManyToOne
-	@JoinColumn(name="aluno_id")
-	private Aluno aluno;
+	@JsonIgnoreProperties("disciplinas")
+	@ManyToMany(mappedBy = "disciplinas")
+	private List<Aluno>alunos;
 }
